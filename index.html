@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm AI - Bangun Pagi Kreatif</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- TensorFlow.js dan Teachable Machine Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+</head>
+<body>
+    <main id="app">
+        <header>
+            <h1>Alarm Pintar AI</h1>
+            <p>Selesaikan tantangan kamera agar bisa mematikan alarm!</p>
+        </header>
+
+        <!-- Loading State -->
+        <section id="loading-model" class="card">
+            <div class="spinner"></div>
+            <p>Memuat Model Kecerdasan Buatan...</p>
+        </section>
+
+        <!-- Pengaturan Alarm -->
+        <section id="alarm-settings" class="card hidden fade-in">
+            <h2>Atur Waktu Bangun</h2>
+            <div class="input-group">
+                <input type="time" id="alarm-time" required>
+            </div>
+            <button id="btn-save-alarm" class="btn-primary">Simpan Alarm</button>
+            
+            <div id="active-alarm-info" class="hidden slide-down">
+                <p>Alarm aktif untuk pukul <span id="display-alarm-time" class="highlight"></span></p>
+                <button id="btn-cancel-alarm" class="btn-danger">Batalkan</button>
+            </div>
+            
+            <div class="info-section">
+                <h3>Barang yang mungkin diminta:</h3>
+                <ul id="item-list">
+                    <li>Memuat daftar barang...</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Saat Alarm Berbunyi -->
+        <section id="alarm-challenge" class="card hidden alarm-ringing fade-in">
+            <div class="notification-banner">
+                <h2>WAKTUNYA BANGUN!</h2>
+            </div>
+            <div class="challenge-instruction">
+                <p>Untuk mematikan alarm, tunjukkan barang ini ke kamera:</p>
+                <h3 id="target-item" class="highlight-huge">...</h3>
+            </div>
+            
+            <div class="camera-container">
+                <canvas id="canvas"></canvas>
+            </div>
+            
+            <div id="detection-status" class="status-container">
+                <p>Status Deteksi Real-Time:</p>
+                <div class="progress-wrapper">
+                    <div class="progress-bar-container">
+                        <div id="confidence-bar" class="progress-bar"></div>
+                    </div>
+                    <span id="confidence-text">0%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pesan Sukses -->
+        <section id="success-message" class="card hidden fade-in">
+            <div class="success-icon">✓</div>
+            <h2 class="success-text">Selamat! Kamu sudah bangun.</h2>
+            <p>Semangat menjalani hari ini! Jangan lupa tersenyum.</p>
+            <button id="btn-reset" class="btn-primary mt-20">Atur Ulang Alarm</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
